@@ -1,0 +1,17 @@
+services:
+  product-service:
+    container_name: 'product-service'
+    image: product-service:latest
+    restart: unless-stopped
+    ports:
+      - 9999:9999
+    networks:
+      - local_network
+    volumes:
+      - /src/main/resources/application.yml:/app/application.yml
+      - /logs:/app/logs
+networks:
+  local_network:
+    name: local_network
+    driver: bridge
+    external: true

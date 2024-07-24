@@ -1,0 +1,37 @@
+server:
+  port: 1010
+
+spring:
+  application:
+    name: order-service
+
+  main:
+    web-application-type: none
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/order-svc
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+
+  zipkin:
+    base-url: http://localhost:9411
+
+  kafka:
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+    bootstrap-servers: localhost:29092
+    config:
+      topic:
+        order: order
